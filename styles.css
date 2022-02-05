@@ -1,0 +1,148 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-color: #555555;
+    --light-color: #CCCCCC;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    margin: 0;
+    font-size: 1em;
+    font-family: sans-serif;
+    background-color: var(--dark-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+h1 {
+    margin: 0;
+    color: #EFEFEF;
+    font-size: 4.8em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: .5em;
+}
+
+.wrapper {
+    margin-top: -2.5em;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.tool-bar {
+    width: 279px;
+    height: 590px;
+    background-color: var(--light-color);
+    margin-right: 3em;
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.tool-bar > * {
+    display: block;
+}
+
+input[type='color'] {
+    width: 100%;
+    margin: 0 auto 2em;
+    margin-bottom: 2em;
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+}
+
+input[type='color']::-webkit-color-swatch {
+    border: none;
+    
+}
+
+.tool-bar button {
+    width: 100%;
+    padding: 1.5em;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    font-weight: 600;
+    border: none;
+    margin-bottom: 2em;
+}
+
+.range-value {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.6em;
+    margin: .7em 0;
+    color: var(--dark-color);
+}
+
+.range-value span:nth-child(2) {
+    margin: 0 .3em;
+}
+
+.board {
+    width: 590px;
+    height: 590px;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.pixel {
+    background-color: #ffffff;
+    margin: 0;
+}
+
+.message {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    font-weight: 400;
+    font-size: 1.7em;
+    padding: .5em;
+    position: absolute;
+    width: 40%;
+    left: 50%;
+    bottom: 2%;
+    transform: translateX(-50%);
+    display: none;
+}
+
+.message p {
+    margin: 0;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    font-weight: bold;
+    transform: translateY(-50%);
+    padding: .2em .4em;
+    transition: background-color .2s ease-in, color .2s ease-in;
+}
+
+.close:hover {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+}
+
+.display-toggle {
+    display: none;
+}
