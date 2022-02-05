@@ -8,6 +8,29 @@
     </head>
 
     <body>
+        <div class='wrapper'>
+            <h1 class='heading-text'>Etch-a-Sketch</h1>
+            <div class='main'>
+                <div class='tool-bar'>
+                    <input type='color' value="#4A96DC">
+                    <button>Color Mode</button>
+                    <button>Rainbow Mode</button>
+                    <button>Monochrome</button>
+                    <button>Eraser</button>
+                    <p class='range-value'><span class='res'>62</span><span>by</span><span class='res'>62</span></p>
+                    <input type='range' id='resolution' min="1" max="80">
+                </div>
+
+                <div class='board'></div>
+
+            </div>
+
+            <div class='message'><p>Move cursor over board to erase. Double-click eraser to clear board</p><p class='close'>X</p></div>
+
+        </div>
+
+
+
         <script src='script.js'></script>
     </body>
 </html>
