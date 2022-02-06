@@ -1,8 +1,7 @@
 const toolBar = document.querySelector('.tool-bar')
 const colorWell = document.querySelector('input[type=color]');
-const colorButtons = document.querySelectorAll('.tool-bar > button')
+const colorModeButtons = document.querySelectorAll('.tool-bar > button')
 const board = document.querySelector('.board');
-const pixels = document.querySelectorAll('.pixel');
 const resolutionPicker = document.querySelector('input[type=range]');
 const resolutionDisplay = document.querySelectorAll('.res');
 const message = document.querySelector('.message');
@@ -11,24 +10,20 @@ const closeButton = document.querySelector('.close');
 let colorMode = 'color';
 let count = 12;
 
-function getRandom() {
-    return Math.floor(Math.random() * 256);
-}
 
-function createPixel(parent, pixelCount = 12) {
-    let boardDimension = 590;
-    parent.style.width = boardDimension + 'px';
-    parent.style.height = boardDimension + 'px';
-    parent.style.maxHeight = boardDimension + 'px';
-    let pixelDimension = boardDimension / pixelCount;
+function createBoard(parent, pixelCount = 12) {
+    let boardSize = 590;
+    parent.style.width = boardSize + 'px';
+    parent.style.height = boardSize + 'px';
+    let pixelSize = boardSize / pixelCount;
     
 
     for(let i = 1; i <= pixelCount * pixelCount; i += 1) {
         const pixel = document.createElement('div');
         pixel.className = 'pixel';
         parent.appendChild(pixel);
-        pixel.style.width = pixelDimension + 'px';
-        pixel.style.height = pixelDimension + 'px';
+        pixel.style.width = pixelSize + 'px';
+        pixel.style.height = pixelSize + 'px';
     }
 }
 
@@ -36,6 +31,9 @@ function clearBoard(element) {
     element.innerHTML = '';
 }
 
+function getRandom() {
+    return Math.floor(Math.random() * 256);
+}
 
 function randomColor(random) {
     const red = random()
@@ -44,26 +42,7 @@ function randomColor(random) {
     return `rgb(${red}, ${green}, ${blue})`;
 }
 
-createPixel(board)
-
-toolBar.addEventListener('click', event => {
-    let button = event.target;
-    if(button.tagName === 'BUTTON') {
-        switch(button.textContent) {
-            case 'Rainbow Mode':
-                colorMode = 'rainbow';
-                break;
-            case 'Monochrome':
-                colorMode = 'monochrome';
-                break;
-            case 'Eraser':
-                colorMode = 'eraser';
-                break;
-            default:
-                colorMode = 'color';
-        }
-    }
-})
+createBoard(board);
 
 function shading(color) {
     color = parseInt(color.substr(4, color.indexOf(',') - 4));
@@ -83,17 +62,30 @@ resolutionPicker.addEventListener('input', () => {
     })
     clearBoard(board);
     count = resolutionPicker.value;
-    createPixel(board, count);
+    createBoard(board, count);
 })
 
-colorButtons[3].addEventListener('dblclick', ()=> {
+colorModeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        for(let i = 0; i < colorModeButtons.length; i += 1) {
+            colorModeButtons[i].style.backgroundColor = '#555555';
+        }
+
+        colorMode = button.id
+        if(colorMode === button.id) {
+            button.style.backgroundColor = '#4A96DC';
+        }
+    })
+})
+
+colorModeButtons[3].addEventListener('dblclick', ()=> {
     let pixels = board.children;
     for(let i = 0; i < pixels.length; i += 1) {
         pixels[i].style.backgroundColor = '#ffffff';
     }
 })
 
-colorButtons[3].addEventListener('click', () => {
+colorModeButtons[3].addEventListener('click', () => {
     message.style.display = 'block';
     setTimeout(function() {
         message.style.display = 'none';
@@ -114,7 +106,7 @@ board.addEventListener('mouseover', (event) => {
         else if(colorMode === 'rainbow') {
             pixel.style.backgroundColor = randomColor(getRandom);
         }
-        else if(colorMode === 'monochrome') {
+        else if(colorMode === 'grayscale') {
             let pxl = getComputedStyle(pixel).getPropertyValue('background-color');
             pixel.style.backgroundColor = shading(pxl);
             
