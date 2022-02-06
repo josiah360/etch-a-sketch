@@ -8,7 +8,7 @@ const message = document.querySelector('.message');
 const closeButton = document.querySelector('.close');
 
 let colorMode = 'color';
-let count = 12;
+let count;
 
 
 function createBoard(parent, pixelCount = 12) {
@@ -16,7 +16,6 @@ function createBoard(parent, pixelCount = 12) {
     parent.style.width = boardSize + 'px';
     parent.style.height = boardSize + 'px';
     let pixelSize = boardSize / pixelCount;
-    
 
     for(let i = 1; i <= pixelCount * pixelCount; i += 1) {
         const pixel = document.createElement('div');
@@ -72,9 +71,7 @@ colorModeButtons.forEach(button => {
         }
 
         colorMode = button.id
-        if(colorMode === button.id) {
-            button.style.backgroundColor = '#4A96DC';
-        }
+        button.style.backgroundColor = '#4A96DC';
     })
 })
 
@@ -101,8 +98,8 @@ board.addEventListener('mouseover', (event) => {
     const pixel = event.target;
     if(pixel.className !== 'board') {
         if(colorMode === 'color') {
-                pixel.style.backgroundColor = colorWell.value;
-            }
+            pixel.style.backgroundColor = colorWell.value;
+        }
         else if(colorMode === 'rainbow') {
             pixel.style.backgroundColor = randomColor(getRandom);
         }
