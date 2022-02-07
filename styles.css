@@ -81,6 +81,11 @@ input[type='color']::-webkit-color-swatch {
     font-weight: 600;
     border: none;
     margin-bottom: 2em;
+    transition: transform .2s ease-out;
+}
+
+.tool-bar button:hover {
+    transform: scale(1.03);
 }
 
 .range-value {
@@ -96,8 +101,6 @@ input[type='color']::-webkit-color-swatch {
 }
 
 .board {
-    width: 590px;
-    height: 590px;
     background-color: white;
     display: flex;
     flex-wrap: wrap;
