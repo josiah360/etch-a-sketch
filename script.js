@@ -43,8 +43,6 @@ function randomColor(random) {
     return `rgb(${red}, ${green}, ${blue})`;
 }
 
-createBoard(board);
-
 function shading(color) {
     color = parseInt(color.substr(4, color.indexOf(',') - 4));
     if (color === 225) {
@@ -56,6 +54,9 @@ function shading(color) {
 
     return `rgb(${color}, ${color}, ${color})`;
 }
+
+createBoard(board);
+colorModeButtons[0].style.backgroundColor = '#4A96DC';
 
 resolutionPicker.addEventListener('input', () => {
     resolutionDisplay.forEach(resolutionDis => {
