@@ -1,3 +1,4 @@
+const body = document.querySelector('body');
 const toolBar = document.querySelector('.tool-bar')
 const colorWell = document.querySelector('input[type=color]');
 const colorModeButtons = document.querySelectorAll('.tool-bar > button')
@@ -9,6 +10,7 @@ const closeButton = document.querySelector('.close');
 
 let colorMode = 'color';
 let count;
+let mousedown = false;
 
 
 function createBoard(parent, pixelCount = 12) {
@@ -93,23 +95,32 @@ closeButton.addEventListener('click', () => {
     message.style.display = 'none';
 })
 
+body.addEventListener('mousedown', () => {
+    mousedown = true;
+})
+
+body.addEventListener('mouseup', () => {
+    mousedown = false;
+})
 
 board.addEventListener('mouseover', (event) => {
     const pixel = event.target;
-    if(pixel.className !== 'board') {
-        if(colorMode === 'color') {
-            pixel.style.backgroundColor = colorWell.value;
-        }
-        else if(colorMode === 'rainbow') {
-            pixel.style.backgroundColor = randomColor(getRandom);
-        }
-        else if(colorMode === 'grayscale') {
-            let pxl = getComputedStyle(pixel).getPropertyValue('background-color');
-            pixel.style.backgroundColor = shading(pxl);
-            
-        }
-        else if(colorMode === 'eraser') {
-            pixel.style.backgroundColor = 'rgb(255, 255, 255)';
+    if(mousedown === true) {
+        if(pixel.className !== 'board') {
+            if(colorMode === 'color') {
+                pixel.style.backgroundColor = colorWell.value;
+            }
+            else if(colorMode === 'rainbow') {
+                pixel.style.backgroundColor = randomColor(getRandom);
+            }
+            else if(colorMode === 'grayscale') {
+                let pxl = getComputedStyle(pixel).getPropertyValue('background-color');
+                pixel.style.backgroundColor = shading(pxl);
+                
+            }
+            else if(colorMode === 'eraser') {
+                pixel.style.backgroundColor = 'rgb(255, 255, 255)';
+            }
         }
     }
 })
